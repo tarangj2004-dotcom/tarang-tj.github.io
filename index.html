@@ -550,7 +550,7 @@
     <p class="hero-title">MIS student at UW Bothell turning messy data into decisions that stick. 4+ years across product analytics, IT business analysis, and operations.</p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-filled">View Work</a>
-      <a href="mailto:tarangjammalamadaka9@gmail.com" class="btn">Get in Touch</a>
+      <a href="#" class="btn" onclick="openEmail(event)">Get in Touch</a>
     </div>
   </div>
   <div class="hero-right">
@@ -728,7 +728,7 @@
       <h2 class="contact-heading reveal">Let's work<br>on something<br><em>good.</em></h2>
     </div>
     <div class="contact-links reveal">
-      <a href="mailto:tarangjammalamadaka9@gmail.com" class="contact-link">
+      <a href="#" class="contact-link" onclick="openEmail(event)">
         <span class="contact-link-icon">Email</span>
         <span class="contact-link-text">tarangjammalamadaka9@gmail.com</span>
         <span class="contact-link-label">↗</span>
@@ -753,6 +753,15 @@
 </footer>
 
 <script>
+  function openEmail(e) {
+    e.preventDefault();
+    var email = "tarangjammalamadaka9@gmail.com";
+    var tried = window.open("mailto:" + email, "_self");
+    setTimeout(function() {
+      window.open("https://mail.google.com/mail/?view=cm&fs=1&to=" + email, "_blank");
+    }, 600);
+  }
+
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
