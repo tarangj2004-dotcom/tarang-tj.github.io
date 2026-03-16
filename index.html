@@ -17,18 +17,9 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
 
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-
-  /* NOISE TEXTURE OVERLAY */
   body::before {
     content: '';
     position: fixed;
@@ -39,478 +30,97 @@
     opacity: 0.6;
   }
 
-  /* NAVIGATION */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
     padding: 1.25rem 3rem;
     background: rgba(245, 242, 236, 0.88);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--rule);
   }
-
-  .nav-logo {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: var(--accent);
-    text-transform: uppercase;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--ink); }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 5rem;
-  }
-
-  .hero-left {
-    padding: 6rem 3rem 4rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-right: 1px solid var(--rule);
-  }
-
-  .hero-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.2s;
-  }
-
-  .hero-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(3rem, 5vw, 5.5rem);
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    margin-bottom: 1rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.35s;
-  }
-
-  .hero-name em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .hero-title {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.6;
-    max-width: 380px;
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.5s;
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.65s;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 0.75rem 1.75rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1.5px solid var(--ink);
-    color: var(--ink);
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 5rem; }
+  .hero-left { padding: 6rem 3rem 4rem 3rem; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--rule); }
+  .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s; }
+  .hero-name { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 5vw, 5.5rem); line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s; }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-title { font-family: 'DM Sans', sans-serif; font-size: 1.05rem; font-weight: 300; color: var(--muted); line-height: 1.6; max-width: 380px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s; }
+  .hero-cta { display: flex; gap: 1rem; opacity: 0; animation: fadeUp 0.7s ease forwards 0.65s; }
+  .btn { display: inline-block; padding: 0.75rem 1.75rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer; transition: all 0.2s; }
   .btn:hover { background: var(--ink); color: var(--paper); }
-
-  .btn-filled {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-  }
-
+  .btn-filled { background: var(--accent); border-color: var(--accent); color: white; }
   .btn-filled:hover { background: #a83a20; border-color: #a83a20; color: white; }
 
-  .hero-right {
-    padding: 6rem 3rem 4rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0;
-  }
-
-  .stat-row {
-    padding: 1.75rem 0;
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    align-items: baseline;
-    gap: 1.25rem;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
-  }
-
+  .hero-right { padding: 6rem 3rem 4rem 3rem; display: flex; flex-direction: column; justify-content: center; gap: 0; }
+  .stat-row { padding: 1.75rem 0; border-bottom: 1px solid var(--rule); display: flex; align-items: baseline; gap: 1.25rem; opacity: 0; animation: fadeUp 0.6s ease forwards; }
   .stat-row:nth-child(1) { animation-delay: 0.4s; }
   .stat-row:nth-child(2) { animation-delay: 0.55s; }
   .stat-row:nth-child(3) { animation-delay: 0.7s; }
   .stat-row:nth-child(4) { animation-delay: 0.85s; }
+  .stat-number { font-family: 'DM Serif Display', serif; font-size: 2.8rem; color: var(--accent); line-height: 1; min-width: 90px; }
+  .stat-label { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+  .stat-label strong { display: block; color: var(--ink); font-weight: 500; font-size: 0.92rem; margin-bottom: 0.15rem; }
 
-  .stat-number {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.8rem;
-    color: var(--accent);
-    line-height: 1;
-    min-width: 90px;
-  }
+  section { padding: 5rem 3rem; border-top: 1px solid var(--rule); }
+  .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3.5rem; }
+  .section-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 2.4rem; letter-spacing: -0.02em; }
 
-  .stat-label {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.4;
-  }
-
-  .stat-label strong {
-    display: block;
-    color: var(--ink);
-    font-weight: 500;
-    font-size: 0.92rem;
-    margin-bottom: 0.15rem;
-  }
-
-  /* SECTION LAYOUT */
-  section {
-    padding: 5rem 3rem;
-    border-top: 1px solid var(--rule);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    margin-bottom: 3.5rem;
-  }
-
-  .section-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-  }
-
-  .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.4rem;
-    letter-spacing: -0.02em;
-  }
-
-  /* PROJECTS */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: 1px solid var(--rule);
-  }
-
-  .project-card {
-    padding: 2.25rem;
-    border-right: 1px solid var(--rule);
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s;
-  }
-
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); }
+  .project-card { padding: 2.25rem; border-right: 1px solid var(--rule); position: relative; overflow: hidden; transition: background 0.3s; }
   .project-card:last-child { border-right: none; }
   .project-card:hover { background: var(--card); }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
   .project-card:hover::before { transform: scaleX(1); }
+  .project-year { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .project-name { font-family: 'DM Serif Display', serif; font-size: 1.25rem; line-height: 1.25; margin-bottom: 1rem; letter-spacing: -0.01em; }
+  .project-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 0.64rem; letter-spacing: 0.08em; padding: 0.25rem 0.6rem; border: 1px solid var(--rule); color: var(--muted); text-transform: uppercase; }
+  .project-link { display: inline-block; margin-top: 1rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 1px; }
 
-  .project-year {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-  }
-
-  .project-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.25rem;
-    line-height: 1.25;
-    margin-bottom: 1rem;
-    letter-spacing: -0.01em;
-  }
-
-  .project-desc {
-    font-size: 0.83rem;
-    color: var(--muted);
-    line-height: 1.65;
-    margin-bottom: 1.5rem;
-  }
-
-  .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.64rem;
-    letter-spacing: 0.08em;
-    padding: 0.25rem 0.6rem;
-    border: 1px solid var(--rule);
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-
-  /* EXPERIENCE */
   .experience-list { display: flex; flex-direction: column; }
-
-  .exp-item {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 2rem;
-    padding: 2.25rem 0;
-    border-bottom: 1px solid var(--rule);
-  }
-
+  .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; padding: 2.25rem 0; border-bottom: 1px solid var(--rule); }
   .exp-item:first-child { border-top: 1px solid var(--rule); }
-
   .exp-meta { padding-top: 0.2rem; }
+  .exp-dates { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+  .exp-company { font-size: 0.8rem; color: var(--accent2); font-weight: 500; }
+  .exp-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-bullets li { font-size: 0.83rem; color: var(--muted); line-height: 1.6; padding-left: 1rem; position: relative; }
+  .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; }
 
-  .exp-dates {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    margin-bottom: 0.4rem;
-  }
-
-  .exp-company {
-    font-size: 0.8rem;
-    color: var(--accent2);
-    font-weight: 500;
-  }
-
-  .exp-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.6rem;
-    letter-spacing: -0.01em;
-  }
-
-  .exp-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .exp-bullets li {
-    font-size: 0.83rem;
-    color: var(--muted);
-    line-height: 1.6;
-    padding-left: 1rem;
-    position: relative;
-  }
-
-  .exp-bullets li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 0.7rem;
-  }
-
-  /* SKILLS */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    border: 1px solid var(--rule);
-  }
-
-  .skill-group {
-    padding: 2rem;
-    border-right: 1px solid var(--rule);
-  }
-
+  .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--rule); }
+  .skill-group { padding: 2rem; border-right: 1px solid var(--rule); }
   .skill-group:last-child { border-right: none; }
+  .skill-group-title { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+  .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+  .skill-list li { font-size: 0.85rem; color: var(--ink); display: flex; align-items: center; gap: 0.5rem; }
+  .skill-list li::before { content: ''; width: 4px; height: 4px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
 
-  .skill-group-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.25rem;
-  }
-
-  .skill-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-
-  .skill-list li {
-    font-size: 0.85rem;
-    color: var(--ink);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .skill-list li::before {
-    content: '';
-    width: 4px;
-    height: 4px;
-    background: var(--accent);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  /* CONTACT */
-  .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .contact-heading {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .contact-heading { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; letter-spacing: -0.02em; }
   .contact-heading em { font-style: italic; color: var(--accent); }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem 1.5rem;
-    border: 1px solid var(--rule);
-    text-decoration: none;
-    color: var(--ink);
-    transition: all 0.2s;
-    background: transparent;
-  }
-
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link { display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; border: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: all 0.2s; background: transparent; }
   .contact-link:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .contact-link:hover .contact-link-label { color: rgba(245,242,236,0.6); }
-
-  .contact-link-icon {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    min-width: 70px;
-    transition: color 0.2s;
-  }
-
+  .contact-link-icon { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); min-width: 70px; transition: color 0.2s; }
   .contact-link:hover .contact-link-icon { color: rgba(245,242,236,0.5); }
-
   .contact-link-text { font-size: 0.88rem; font-weight: 400; }
+  .contact-link-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); margin-left: auto; text-transform: uppercase; letter-spacing: 0.08em; }
 
-  .contact-link-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-    margin-left: auto;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
+  footer { border-top: 1px solid var(--rule); padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+  footer span { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; }
 
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--rule);
-    padding: 1.5rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  footer span {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
   @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; }
     .hero-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 4rem 1.5rem 3rem; }
@@ -542,7 +152,6 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero" style="border-top:none; padding: 0;">
   <div class="hero-left">
     <p class="hero-tag">Data &amp; Business Analyst</p>
@@ -573,7 +182,6 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="section-header">
     <span class="section-num">01</span>
@@ -591,7 +199,7 @@
         <span class="tag">Trend Analysis</span>
         <span class="tag">Public Data</span>
       </div>
-      <span class="project-link" style="display:inline-block; margin-top:1rem; font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:1px;">View Project ↗</span>
+      <span class="project-link">View Project ↗</span>
     </a>
 
     <div class="project-card reveal">
@@ -606,7 +214,7 @@
       </div>
     </div>
 
-    <div class="project-card reveal">
+    <a href="https://tarang-tj.github.io/team-cartier-dashboard/" target="_blank" class="project-card reveal" style="display:block; text-decoration:none; color:inherit; cursor:pointer;">
       <div class="project-year">2025</div>
       <div class="project-name">CED Financial Case Competition</div>
       <p class="project-desc">Modeled a multi-channel growth strategy projecting $15.3M revenue and 81.5% operating income improvement. Analyzed 25+ expense categories to identify 10–16% cost reduction levers.</p>
@@ -615,19 +223,18 @@
         <span class="tag">Strategy</span>
         <span class="tag">Excel</span>
       </div>
-    </div>
+      <span class="project-link">View Dashboard ↗</span>
+    </a>
 
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-header">
     <span class="section-num">02</span>
     <h2 class="section-title">Experience</h2>
   </div>
   <div class="experience-list">
-
     <div class="exp-item reveal">
       <div class="exp-meta">
         <div class="exp-dates">Oct 2025 — Present</div>
@@ -642,7 +249,6 @@
         </ul>
       </div>
     </div>
-
     <div class="exp-item reveal">
       <div class="exp-meta">
         <div class="exp-dates">Sep 2022 — Sep 2024</div>
@@ -657,7 +263,6 @@
         </ul>
       </div>
     </div>
-
     <div class="exp-item reveal">
       <div class="exp-meta">
         <div class="exp-dates">Aug 2021 — Jun 2022</div>
@@ -672,11 +277,9 @@
         </ul>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
   <div class="section-header">
     <span class="section-num">03</span>
@@ -685,44 +288,23 @@
   <div class="skills-grid">
     <div class="skill-group reveal">
       <div class="skill-group-title">Languages</div>
-      <ul class="skill-list">
-        <li>SQL</li>
-        <li>Python</li>
-        <li>R</li>
-        <li>JavaScript</li>
-      </ul>
+      <ul class="skill-list"><li>SQL</li><li>Python</li><li>R</li><li>JavaScript</li></ul>
     </div>
     <div class="skill-group reveal">
       <div class="skill-group-title">Visualization</div>
-      <ul class="skill-list">
-        <li>Tableau</li>
-        <li>Power BI</li>
-        <li>Excel Dashboards</li>
-      </ul>
+      <ul class="skill-list"><li>Tableau</li><li>Power BI</li><li>Excel Dashboards</li></ul>
     </div>
     <div class="skill-group reveal">
       <div class="skill-group-title">Methodology</div>
-      <ul class="skill-list">
-        <li>Agile / Scrum</li>
-        <li>Requirements Gathering</li>
-        <li>Gap Analysis</li>
-        <li>Process Mapping</li>
-        <li>Root Cause Analysis</li>
-      </ul>
+      <ul class="skill-list"><li>Agile / Scrum</li><li>Requirements Gathering</li><li>Gap Analysis</li><li>Process Mapping</li><li>Root Cause Analysis</li></ul>
     </div>
     <div class="skill-group reveal">
       <div class="skill-group-title">Tools</div>
-      <ul class="skill-list">
-        <li>Jira</li>
-        <li>Microsoft 365</li>
-        <li>Google Suite</li>
-        <li>Power BI (certified)</li>
-      </ul>
+      <ul class="skill-list"><li>Jira</li><li>Microsoft 365</li><li>Google Suite</li><li>Power BI (certified)</li></ul>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner">
     <div>
@@ -754,17 +336,12 @@
 </footer>
 
 <script>
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
     });
   }, { threshold: 0.12 });
-
   reveals.forEach(el => observer.observe(el));
 </script>
 </body>
