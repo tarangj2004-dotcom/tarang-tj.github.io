@@ -1,539 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TJ Jammalamadaka — Data & Business Analyst</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #0f0f0f;
-    --paper: #f5f2ec;
-    --accent: #c84b2f;
-    --accent2: #1a4a6b;
-    --muted: #7a7269;
-    --rule: #d8d3c8;
-    --card: #efeae0;
-  }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tarang (TJ) Jammalamadaka — Data & Product Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
 
+<style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  :root {
+    --bg:       #07070E;
+    --bg2:      #0D0D1A;
+    --bg3:      #12121F;
+    --border:   #1C1C30;
+    --text:     #EAE6DC;
+    --muted:    #6A6A80;
+    --faint:    #282838;
+    --gold:     #C8A84B;
+    --gold-lt:  #E2C97A;
+    --gold-dim: rgba(200,168,75,0.12);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Syne', sans-serif;
+    --body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
 
   body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
     font-weight: 300;
+    line-height: 1.7;
+    cursor: none;
     overflow-x: hidden;
   }
 
-  /* NOISE TEXTURE OVERLAY */
+  /* ── CURSOR ── */
+  #cursor {
+    position: fixed; top: 0; left: 0; width: 10px; height: 10px;
+    background: var(--gold); border-radius: 50%; pointer-events: none;
+    z-index: 9999; transform: translate(-50%,-50%);
+    transition: width .2s, height .2s, background .2s;
+  }
+  #cursor-ring {
+    position: fixed; top: 0; left: 0; width: 36px; height: 36px;
+    border: 1px solid rgba(200,168,75,0.5); border-radius: 50%; pointer-events: none;
+    z-index: 9998; transform: translate(-50%,-50%);
+    transition: transform .08s ease-out, width .2s, height .2s;
+  }
+  body:has(a:hover) #cursor { width: 18px; height: 18px; background: var(--gold-lt); }
+  body:has(a:hover) #cursor-ring { width: 50px; height: 50px; border-color: var(--gold); }
+
+  /* ── NOISE OVERLAY ── */
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.6;
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
   }
 
-  /* NAVIGATION */
+  /* ── NAV ── */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 3rem;
-    background: rgba(245, 242, 236, 0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--rule);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: linear-gradient(to bottom, rgba(7,7,14,0.95) 0%, rgba(7,7,14,0) 100%);
+    backdrop-filter: blur(0px);
   }
-
   .nav-logo {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: var(--accent);
+    font-family: var(--sans); font-size: .85rem; font-weight: 700;
+    letter-spacing: .15em; color: var(--gold); text-decoration: none;
     text-transform: uppercase;
   }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
+    font-family: var(--sans); font-size: .72rem; font-weight: 500;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+    text-decoration: none; transition: color .2s;
   }
+  .nav-links a:hover { color: var(--text); }
 
-  .nav-links a:hover { color: var(--ink); }
-
-  /* HERO */
+  /* ── HERO ── */
   .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 5rem;
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; padding: 8rem 4rem 5rem;
+    position: relative; overflow: hidden;
   }
-
-  .hero-left {
-    padding: 6rem 3rem 4rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-right: 1px solid var(--rule);
+  .hero-bg-lines {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(to right, var(--faint) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--faint) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    opacity: 0.4;
   }
-
-  .hero-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.2s;
+  .hero-label {
+    font-family: var(--sans); font-size: .72rem; font-weight: 600;
+    letter-spacing: .3em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.5rem; opacity: 0;
+    animation: fadeUp .6s ease forwards .2s;
   }
-
   .hero-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(3rem, 5vw, 5.5rem);
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    margin-bottom: 1rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.35s;
+    font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 8rem);
+    font-weight: 300; line-height: 1.0; margin-bottom: 1rem;
+    opacity: 0; animation: fadeUp .7s ease forwards .4s;
   }
-
-  .hero-name em {
-    font-style: italic;
-    color: var(--accent);
+  .hero-name em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-family: var(--body); font-size: clamp(.95rem, 1.5vw, 1.15rem);
+    font-weight: 300; color: var(--muted); max-width: 560px; margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp .7s ease forwards .6s;
   }
-
-  .hero-title {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.6;
-    max-width: 380px;
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.5s;
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp .7s ease forwards .8s;
   }
-
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.65s;
-  }
-
   .btn {
-    display: inline-block;
-    padding: 0.75rem 1.75rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1.5px solid var(--ink);
-    color: var(--ink);
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.2s;
+    font-family: var(--sans); font-size: .72rem; font-weight: 600;
+    letter-spacing: .18em; text-transform: uppercase; text-decoration: none;
+    padding: .85rem 2rem; border-radius: 2px; transition: all .25s; display: inline-block;
   }
-
-  .btn:hover { background: var(--ink); color: var(--paper); }
-
-  .btn-filled {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
+  .btn-primary {
+    background: var(--gold); color: var(--bg); border: 1px solid var(--gold);
   }
-
-  .btn-filled:hover { background: #a83a20; border-color: #a83a20; color: white; }
-
-  .hero-right {
-    padding: 6rem 3rem 4rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0;
+  .btn-primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--text); border: 1px solid var(--border);
   }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-  .stat-row {
-    padding: 1.75rem 0;
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    align-items: baseline;
-    gap: 1.25rem;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
+  .hero-stats {
+    position: absolute; right: 4rem; bottom: 5rem;
+    display: flex; flex-direction: column; gap: 2rem; text-align: right;
+    opacity: 0; animation: fadeUp .7s ease forwards 1s;
   }
-
-  .stat-row:nth-child(1) { animation-delay: 0.4s; }
-  .stat-row:nth-child(2) { animation-delay: 0.55s; }
-  .stat-row:nth-child(3) { animation-delay: 0.7s; }
-  .stat-row:nth-child(4) { animation-delay: 0.85s; }
-
-  .stat-number {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.8rem;
-    color: var(--accent);
-    line-height: 1;
-    min-width: 90px;
+  .stat-num {
+    font-family: var(--serif); font-size: 2.8rem; font-weight: 300; line-height: 1;
+    color: var(--text);
   }
-
+  .stat-num span { color: var(--gold); }
   .stat-label {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.4;
+    font-family: var(--sans); font-size: .65rem; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--muted); margin-top: .2rem;
   }
 
-  .stat-label strong {
-    display: block;
-    color: var(--ink);
-    font-weight: 500;
-    font-size: 0.92rem;
-    margin-bottom: 0.15rem;
-  }
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* SECTION LAYOUT */
-  section {
-    padding: 5rem 3rem;
-    border-top: 1px solid var(--rule);
-  }
-
+  /* ── SECTIONS ── */
+  section { padding: 7rem 4rem; position: relative; }
   .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    margin-bottom: 3.5rem;
+    display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem;
   }
-
   .section-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
+    font-family: var(--serif); font-size: 5rem; font-weight: 300; line-height: 1;
+    color: var(--faint); user-select: none; flex-shrink: 0;
   }
-
   .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.4rem;
-    letter-spacing: -0.02em;
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300; line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  hr.section-rule {
+    border: none; border-top: 1px solid var(--border); margin: 0 4rem;
   }
 
-  /* PROJECTS */
+  /* ── PROJECTS ── */
   .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: 1px solid var(--rule);
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.5px; background: var(--border);
   }
-
   .project-card {
-    padding: 2.25rem;
-    border-right: 1px solid var(--rule);
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s;
+    background: var(--bg); padding: 2.5rem; position: relative;
+    overflow: hidden; transition: background .3s;
+    display: flex; flex-direction: column; gap: 1rem;
   }
-
-  .project-card:last-child { border-right: none; }
-  .project-card:hover { background: var(--card); }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
+  .project-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gold-dim);
+    transform: translateY(100%); transition: transform .4s ease;
   }
-
-  .project-card:hover::before { transform: scaleX(1); }
-
+  .project-card:hover::after { transform: translateY(0); }
+  .project-card:hover { background: var(--bg2); }
+  .project-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    position: relative; z-index: 1;
+  }
   .project-year {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
+    font-family: var(--sans); font-size: .65rem; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--gold);
   }
-
-  .project-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.25rem;
-    line-height: 1.25;
-    margin-bottom: 1rem;
-    letter-spacing: -0.01em;
+  .project-arrow {
+    font-size: 1.1rem; color: var(--muted); transition: color .2s, transform .2s;
   }
-
+  .project-card:hover .project-arrow { color: var(--gold); transform: translate(3px,-3px); }
+  .project-title {
+    font-family: var(--serif); font-size: 1.55rem; font-weight: 400; line-height: 1.2;
+    position: relative; z-index: 1;
+  }
   .project-desc {
-    font-size: 0.83rem;
-    color: var(--muted);
-    line-height: 1.65;
-    margin-bottom: 1.5rem;
+    font-size: .88rem; color: var(--muted); line-height: 1.7;
+    position: relative; z-index: 1;
   }
-
   .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+    display: flex; flex-wrap: wrap; gap: .4rem; margin-top: auto;
+    position: relative; z-index: 1;
   }
-
   .tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.64rem;
-    letter-spacing: 0.08em;
-    padding: 0.25rem 0.6rem;
-    border: 1px solid var(--rule);
-    color: var(--muted);
-    text-transform: uppercase;
+    font-family: var(--sans); font-size: .6rem; font-weight: 600;
+    letter-spacing: .15em; text-transform: uppercase;
+    padding: .3rem .7rem; border: 1px solid var(--border); color: var(--muted);
+    border-radius: 1px; transition: border-color .2s, color .2s;
+  }
+  .project-card:hover .tag { border-color: rgba(200,168,75,0.3); color: var(--gold-lt); }
+  .project-link {
+    text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 1rem;
+    height: 100%;
   }
 
-  /* EXPERIENCE */
+  /* ── EXPERIENCE ── */
   .experience-list { display: flex; flex-direction: column; }
-
   .exp-item {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 2rem;
-    padding: 2.25rem 0;
-    border-bottom: 1px solid var(--rule);
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 3rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border);
+    transition: background .2s;
   }
-
-  .exp-item:first-child { border-top: 1px solid var(--rule); }
-
-  .exp-meta { padding-top: 0.2rem; }
-
-  .exp-dates {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    margin-bottom: 0.4rem;
+  .exp-item:first-child { border-top: 1px solid var(--border); }
+  .exp-meta {}
+  .exp-period {
+    font-family: var(--sans); font-size: .7rem; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: .4rem;
   }
-
   .exp-company {
-    font-size: 0.8rem;
-    color: var(--accent2);
-    font-weight: 500;
+    font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
+    margin-bottom: .2rem;
   }
-
-  .exp-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.6rem;
-    letter-spacing: -0.01em;
+  .exp-loc {
+    font-family: var(--sans); font-size: .65rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
   }
-
-  .exp-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  .exp-content {}
+  .exp-role {
+    font-family: var(--serif); font-size: 1.4rem; font-weight: 400;
+    margin-bottom: 1rem;
   }
-
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
   .exp-bullets li {
-    font-size: 0.83rem;
-    color: var(--muted);
-    line-height: 1.6;
-    padding-left: 1rem;
-    position: relative;
+    font-size: .88rem; color: var(--muted); padding-left: 1.2rem; position: relative;
   }
-
   .exp-bullets li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 0.7rem;
+    content: '→'; position: absolute; left: 0; color: var(--gold); font-size: .75rem;
   }
+  .exp-bullets li strong { color: var(--text); font-weight: 400; }
 
-  /* SKILLS */
+  /* ── SKILLS ── */
   .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    border: 1px solid var(--rule);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px;
+    background: var(--border);
   }
-
   .skill-group {
-    padding: 2rem;
-    border-right: 1px solid var(--rule);
+    background: var(--bg); padding: 2.5rem;
   }
-
-  .skill-group:last-child { border-right: none; }
-
   .skill-group-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.25rem;
+    font-family: var(--sans); font-size: .65rem; letter-spacing: .25em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
   }
-
-  .skill-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
+  .skill-items { display: flex; flex-direction: column; gap: .6rem; }
+  .skill-item {
+    font-family: var(--serif); font-size: 1.15rem; font-weight: 300;
+    color: var(--text); transition: color .2s; cursor: default;
   }
+  .skill-item:hover { color: var(--gold-lt); }
 
-  .skill-list li {
-    font-size: 0.85rem;
-    color: var(--ink);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .skill-list li::before {
-    content: '';
-    width: 4px;
-    height: 4px;
-    background: var(--accent);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  /* CONTACT */
+  /* ── CONTACT ── */
+  #contact { background: var(--bg2); }
   .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;
   }
-
   .contact-heading {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-family: var(--serif); font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300; line-height: 1.05; max-width: 700px;
   }
-
-  .contact-heading em { font-style: italic; color: var(--accent); }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
+  .contact-heading em { font-style: italic; color: var(--gold); }
+  .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
   .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem 1.5rem;
-    border: 1px solid var(--rule);
-    text-decoration: none;
-    color: var(--ink);
-    transition: all 0.2s;
-    background: transparent;
+    display: flex; align-items: center; gap: .8rem; padding: 1rem 1.8rem;
+    border: 1px solid var(--border); text-decoration: none; color: var(--text);
+    font-family: var(--sans); font-size: .72rem; letter-spacing: .15em;
+    text-transform: uppercase; transition: all .25s; border-radius: 2px;
   }
+  .contact-link:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .contact-link-icon { font-size: 1rem; }
 
-  .contact-link:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .contact-link:hover .contact-link-label { color: rgba(245,242,236,0.6); }
-
-  .contact-link-icon {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    min-width: 70px;
-    transition: color 0.2s;
-  }
-
-  .contact-link:hover .contact-link-icon { color: rgba(245,242,236,0.5); }
-
-  .contact-link-text { font-size: 0.88rem; font-weight: 400; }
-
-  .contact-link-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-    margin-left: auto;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  /* FOOTER */
+  /* ── FOOTER ── */
   footer {
-    border-top: 1px solid var(--rule);
-    padding: 1.5rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 2rem 4rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy {
+    font-family: var(--sans); font-size: .65rem; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .footer-status {
+    display: flex; align-items: center; gap: .5rem;
+    font-family: var(--sans); font-size: .65rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .status-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ADE80;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%,100% { opacity: 1; } 50% { opacity: .4; }
   }
 
-  footer span {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-  }
-
-  /* ANIMATIONS */
+  /* ── ANIMATIONS ── */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
+  /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 4rem 1.5rem 3rem; }
-    .hero-right { padding: 2rem 1.5rem; }
+    nav { padding: 1.25rem 2rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 2rem 4rem; }
+    .hero-stats { display: none; }
+    section { padding: 5rem 2rem; }
+    hr.section-rule { margin: 0 2rem; }
     .projects-grid { grid-template-columns: 1fr; }
-    .project-card { border-right: none; border-bottom: 1px solid var(--rule); }
-    .skills-grid { grid-template-columns: 1fr 1fr; }
-    .skill-group:nth-child(2) { border-right: none; }
-    .skill-group:nth-child(3) { border-right: 1px solid var(--rule); border-top: 1px solid var(--rule); }
-    .skill-group:nth-child(4) { border-right: none; border-top: 1px solid var(--rule); }
-    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    nav { padding: 1rem 1.5rem; }
-    section { padding: 3.5rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .exp-item { grid-template-columns: 1fr; gap: .5rem; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; text-align: center; }
+  }
+
+  @media (max-width: 500px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-name { font-size: 2.8rem; }
   }
 </style>
 </head>
 <body>
 
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Nav -->
 <nav>
-  <div class="nav-logo">TJ_</div>
+  <a href="#" class="nav-logo">TJ_</a>
   <ul class="nav-links">
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -542,132 +369,188 @@
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero" style="border-top:none; padding: 0;">
-  <div class="hero-left">
-    <p class="hero-tag">Data &amp; Business Analyst</p>
-    <h1 class="hero-name">Tarang<br><em>(TJ)</em><br>Jammalamadaka</h1>
-    <p class="hero-title">MIS student at UW Bothell turning messy data into decisions that stick. 4+ years across product analytics, IT business analysis, and operations.</p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-filled">View Work</a>
-      <a href="mailto:tarangjammalamadaka9@gmail.com" class="btn">Get in Touch</a>
-    </div>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg-lines"></div>
+  <p class="hero-label">Data &amp; Product Analyst — Seattle, WA</p>
+  <h1 class="hero-name">Tarang <em>(TJ)</em><br>Jammalamadaka</h1>
+  <p class="hero-sub">MIS student at UW Bothell turning messy data into decisions that stick. 4+ years across product analytics, IT business analysis, and operations.</p>
+  <div class="hero-ctas">
+    <a href="#projects" class="btn btn-primary">View Work</a>
+    <a href="/cdn-cgi/l/email-protection#2b5f4a594a454c414a46464a474a464a4f4a404a126b4c464a424705484446" class="btn btn-outline">Get in Touch</a>
   </div>
-  <div class="hero-right">
-    <div class="stat-row">
-      <div class="stat-number">4+</div>
-      <div class="stat-label"><strong>Years of Experience</strong>IT BA → Product Analyst → Ops Analyst</div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num"><span class="count" data-target="4">0</span>+</div>
+      <div class="stat-label">Years Experience</div>
     </div>
-    <div class="stat-row">
-      <div class="stat-number">50K</div>
-      <div class="stat-label"><strong>MAU Database</strong>SQL cohort analysis at JMT Worldwide</div>
+    <div>
+      <div class="stat-num"><span class="count" data-target="50">0</span>K</div>
+      <div class="stat-label">MAU Database — SQL</div>
     </div>
-    <div class="stat-row">
-      <div class="stat-number">12+</div>
-      <div class="stat-label"><strong>Dashboards Built</strong>Tableau &amp; Power BI for C-suite stakeholders</div>
+    <div>
+      <div class="stat-num"><span class="count" data-target="12">0</span>+</div>
+      <div class="stat-label">Dashboards Built</div>
     </div>
-    <div class="stat-row">
-      <div class="stat-number">3.7</div>
-      <div class="stat-label"><strong>GPA — Dean's List</strong>University of Washington Bothell, 2027</div>
+    <div>
+      <div class="stat-num"><span class="count" data-target="3" data-decimal="true">0</span>.7</div>
+      <div class="stat-label">GPA — Dean's List</div>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
+<hr class="section-rule" />
+
+<!-- Projects -->
 <section id="projects">
-  <div class="section-header">
+  <div class="section-header reveal">
     <span class="section-num">01</span>
-    <h2 class="section-title">Selected Projects</h2>
+    <h2 class="section-title">Selected <em>Projects</em></h2>
   </div>
-  <div class="projects-grid">
+  <div class="projects-grid reveal">
 
-    <div class="project-card reveal">
-      <div class="project-year">2025</div>
-      <div class="project-name">Operations &amp; Forecasting Model</div>
-      <p class="project-desc">Built a multivariate regression model on 18 months of sales data achieving 94% prediction accuracy. Designed an interactive KPI dashboard tracking 15+ operational metrics driving a 35% reduction in carrying costs.</p>
-      <div class="project-tags">
-        <span class="tag">Excel</span>
-        <span class="tag">Regression</span>
-        <span class="tag">KPI Dashboard</span>
-        <span class="tag">Forecasting</span>
+    <a class="project-link" href="https://tarang-tj.github.io/economic-pulse-dashboard/" target="_blank" rel="noopener">
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-year">2026</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <h3 class="project-title">Economic Pulse Dashboard</h3>
+        <p class="project-desc">End-to-end Python pipeline fetching 7 FRED macroeconomic indicators. ETL with pandas, statistical trend detection via linear regression, and an interactive Streamlit dashboard with Plotly charts, recession shading, and correlation heatmap.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">pandas</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">FRED API</span>
+          <span class="tag">ETL</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="project-card reveal">
-      <div class="project-year">2025</div>
-      <div class="project-name">CED Financial Case Competition</div>
-      <p class="project-desc">Modeled a multi-channel growth strategy projecting $15.3M revenue and 81.5% operating income improvement. Analyzed 25+ expense categories to identify 10–16% cost reduction levers.</p>
-      <div class="project-tags">
-        <span class="tag">Financial Modeling</span>
-        <span class="tag">Strategy</span>
-        <span class="tag">Excel</span>
+    <a class="project-link" href="https://github.com/tarang-tj/ecommerce-sql" target="_blank" rel="noopener">
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-year">2026</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <h3 class="project-title">E-Commerce SQL Analytics</h3>
+        <p class="project-desc">End-to-end PostgreSQL analytics on a normalized 6-table schema. Revenue KPIs, customer lifetime value, cohort retention, market basket analysis, and rolling revenue windows across 4 query modules.</p>
+        <div class="project-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Cohort Analysis</span>
+          <span class="tag">Window Functions</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="project-card reveal">
-      <div class="project-year">2024</div>
-      <div class="project-name">WA Homelessness &amp; Housing Affordability Analysis</div>
-      <p class="project-desc">Solo analysis of 9 years of Zillow Rental Index data alongside income and homelessness metrics for Washington State. Identified inflection points where rent outpaced income growth and built an interactive Tableau dashboard for policy storytelling.</p>
-      <div class="project-tags">
-        <span class="tag">R</span>
-        <span class="tag">Tableau</span>
-        <span class="tag">Trend Analysis</span>
-        <span class="tag">Public Data</span>
+    <a class="project-link" href="https://tarang-tj.github.io/wa-housing-homelessness/" target="_blank" rel="noopener">
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-year">2026</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <h3 class="project-title">WA Homelessness &amp; Housing Analysis</h3>
+        <p class="project-desc">Team analysis of 9 years of Zillow Rental Index data alongside income and homelessness metrics for Washington State. Identified inflection points where rent outpaced income growth and built an interactive Tableau dashboard for policy storytelling.</p>
+        <div class="project-tags">
+          <span class="tag">R</span>
+          <span class="tag">Tableau</span>
+          <span class="tag">Trend Analysis</span>
+          <span class="tag">Public Data</span>
+        </div>
       </div>
-    </div>
+    </a>
+
+    <a class="project-link" href="https://tarang-tj.github.io/operations-forecasting-model/" target="_blank" rel="noopener">
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-year">2025</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <h3 class="project-title">Operations &amp; Forecasting Model</h3>
+        <p class="project-desc">Multivariate regression model on 18 months of sales data achieving 94% prediction accuracy. Interactive KPI dashboard tracking 15+ operational metrics, driving a 35% reduction in carrying costs.</p>
+        <div class="project-tags">
+          <span class="tag">Excel</span>
+          <span class="tag">Regression</span>
+          <span class="tag">KPI Dashboard</span>
+          <span class="tag">Forecasting</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-link" href="https://tarang-tj.github.io/team-cartier-dashboard/" target="_blank" rel="noopener">
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-year">2025</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <h3 class="project-title">CED Financial Case Competition</h3>
+        <p class="project-desc">Modeled a multi-channel growth strategy projecting $15.3M revenue and 81.5% operating income improvement. Analyzed 25+ expense categories to identify 10–16% cost reduction levers.</p>
+        <div class="project-tags">
+          <span class="tag">Financial Modeling</span>
+          <span class="tag">Strategy</span>
+          <span class="tag">Excel</span>
+        </div>
+      </div>
+    </a>
 
   </div>
 </section>
 
-<!-- EXPERIENCE -->
+<hr class="section-rule" />
+
+<!-- Experience -->
 <section id="experience">
-  <div class="section-header">
+  <div class="section-header reveal">
     <span class="section-num">02</span>
-    <h2 class="section-title">Experience</h2>
+    <h2 class="section-title">Work <em>Experience</em></h2>
   </div>
   <div class="experience-list">
 
     <div class="exp-item reveal">
       <div class="exp-meta">
-        <div class="exp-dates">Oct 2025 — Present</div>
+        <div class="exp-period">Oct 2025 — Present</div>
         <div class="exp-company">Quadcore Innovations</div>
+        <div class="exp-loc">Seattle, WA</div>
       </div>
-      <div>
-        <div class="exp-title">Operations Improvement Analyst</div>
+      <div class="exp-content">
+        <div class="exp-role">Operations Improvement Analyst</div>
         <ul class="exp-bullets">
-          <li>Mapped end-to-end workflows and performed root cause analysis to isolate three bottlenecks, cutting process completion time by 25%.</li>
+          <li>Mapped end-to-end workflows and performed root cause analysis to isolate three bottlenecks, <strong>cutting process completion time by 25%</strong>.</li>
           <li>Designed Tableau dashboards tracking transaction volume, issue resolution rates, and system uptime for weekly leadership reviews.</li>
-          <li>Automated recurring reporting with SQL and Power BI, reducing manual data entry and reporting cycle time by 40%.</li>
+          <li>Automated recurring reporting with SQL and Power BI, <strong>reducing manual data entry and reporting cycle time by 40%</strong>.</li>
         </ul>
       </div>
     </div>
 
     <div class="exp-item reveal">
       <div class="exp-meta">
-        <div class="exp-dates">Sep 2022 — Sep 2024</div>
+        <div class="exp-period">Sep 2022 — Sep 2024</div>
         <div class="exp-company">JMT Worldwide LLC</div>
+        <div class="exp-loc">Remote</div>
       </div>
-      <div>
-        <div class="exp-title">Product Analyst</div>
+      <div class="exp-content">
+        <div class="exp-role">Product Analyst</div>
         <ul class="exp-bullets">
-          <li>Wrote SQL queries against a 50K+ MAU database for behavioral cohort analysis, driving a 7% improvement in a core retention metric.</li>
-          <li>Built 12 Tableau dashboards consolidating multi-source data for C-suite stakeholders, cutting reporting time by 60%.</li>
-          <li>Synthesized 500+ user feedback responses into a prioritized insight framework contributing to a 10% lift in feature adoption.</li>
+          <li>Wrote SQL queries against a <strong>50K+ MAU database</strong> for behavioral cohort analysis, driving a 7% improvement in a core retention metric.</li>
+          <li>Built 12 Tableau dashboards consolidating multi-source data for C-suite stakeholders, <strong>cutting reporting time by 60%</strong>.</li>
+          <li>Synthesized 500+ user feedback responses into a prioritized insight framework contributing to a <strong>10% lift in feature adoption</strong>.</li>
         </ul>
       </div>
     </div>
 
     <div class="exp-item reveal">
       <div class="exp-meta">
-        <div class="exp-dates">Aug 2021 — Jun 2022</div>
+        <div class="exp-period">Aug 2021 — Jun 2022</div>
         <div class="exp-company">JMT Worldwide LLC</div>
+        <div class="exp-loc">Remote</div>
       </div>
-      <div>
-        <div class="exp-title">IT Business Analyst</div>
+      <div class="exp-content">
+        <div class="exp-role">IT Business Analyst</div>
         <ul class="exp-bullets">
           <li>Gathered and documented stakeholder requirements, translating operational needs into technical specifications bridging business and engineering.</li>
-          <li>Conducted gap analyses and produced process workflows that reduced operational inefficiencies by 15%.</li>
-          <li>Managed Agile backlogs in Jira and contributed to 90% on-time milestone delivery across multiple workstreams.</li>
+          <li>Conducted gap analyses and produced process workflows that <strong>reduced operational inefficiencies by 15%</strong>.</li>
+          <li>Managed Agile backlogs in Jira and contributed to <strong>90% on-time milestone delivery</strong> across multiple workstreams.</li>
         </ul>
       </div>
     </div>
@@ -675,96 +558,122 @@
   </div>
 </section>
 
-<!-- SKILLS -->
+<hr class="section-rule" />
+
+<!-- Skills -->
 <section id="skills">
-  <div class="section-header">
+  <div class="section-header reveal">
     <span class="section-num">03</span>
-    <h2 class="section-title">Skills</h2>
+    <h2 class="section-title">Skills &amp; <em>Tools</em></h2>
   </div>
-  <div class="skills-grid">
-    <div class="skill-group reveal">
+  <div class="skills-grid reveal">
+    <div class="skill-group">
       <div class="skill-group-title">Languages</div>
-      <ul class="skill-list">
-        <li>SQL</li>
-        <li>Python</li>
-        <li>R</li>
-        <li>JavaScript</li>
-      </ul>
+      <div class="skill-items">
+        <div class="skill-item">SQL</div>
+        <div class="skill-item">Python</div>
+        <div class="skill-item">R</div>
+        <div class="skill-item">JavaScript</div>
+      </div>
     </div>
-    <div class="skill-group reveal">
+    <div class="skill-group">
       <div class="skill-group-title">Visualization</div>
-      <ul class="skill-list">
-        <li>Tableau</li>
-        <li>Power BI</li>
-        <li>Excel Dashboards</li>
-      </ul>
+      <div class="skill-items">
+        <div class="skill-item">Tableau</div>
+        <div class="skill-item">Power BI</div>
+        <div class="skill-item">Plotly / Streamlit</div>
+        <div class="skill-item">Excel Dashboards</div>
+      </div>
     </div>
-    <div class="skill-group reveal">
+    <div class="skill-group">
       <div class="skill-group-title">Methodology</div>
-      <ul class="skill-list">
-        <li>Agile / Scrum</li>
-        <li>Requirements Gathering</li>
-        <li>Gap Analysis</li>
-        <li>Process Mapping</li>
-        <li>Root Cause Analysis</li>
-      </ul>
+      <div class="skill-items">
+        <div class="skill-item">Agile / Scrum</div>
+        <div class="skill-item">Requirements Gathering</div>
+        <div class="skill-item">Gap Analysis</div>
+        <div class="skill-item">Root Cause Analysis</div>
+        <div class="skill-item">Process Mapping</div>
+      </div>
     </div>
-    <div class="skill-group reveal">
+    <div class="skill-group">
       <div class="skill-group-title">Tools</div>
-      <ul class="skill-list">
-        <li>Jira</li>
-        <li>Microsoft 365</li>
-        <li>Google Suite</li>
-        <li>Power BI (certified)</li>
-      </ul>
+      <div class="skill-items">
+        <div class="skill-item">Jira</div>
+        <div class="skill-item">Microsoft 365</div>
+        <div class="skill-item">Google Suite</div>
+        <div class="skill-item">Power BI (Certified)</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
+<hr class="section-rule" />
+
+<!-- Contact -->
 <section id="contact">
   <div class="contact-inner">
-    <div>
-      <h2 class="contact-heading reveal">Let's work<br>on something<br><em>good.</em></h2>
-    </div>
+    <h2 class="contact-heading reveal">Let's work on<br>something <em>good.</em></h2>
     <div class="contact-links reveal">
-      <a href="mailto:tarangjammalamadaka9@gmail.com" class="contact-link">
-        <span class="contact-link-icon">Email</span>
-        <span class="contact-link-text">tarangjammalamadaka9@gmail.com</span>
-        <span class="contact-link-label">↗</span>
+      <a href="/cdn-cgi/l/email-protection#dda9bcafbcb3bab7bcb0b0bcb1bcb0bcb9bcb6bce49dbab0bcb4b1f3beb2b0" class="contact-link">
+        <span class="contact-link-icon">✉</span> Email
       </a>
-      <a href="https://www.linkedin.com/in/tarang-tj/" target="_blank" class="contact-link">
-        <span class="contact-link-icon">LinkedIn</span>
-        <span class="contact-link-text">linkedin.com/in/tarang-tj</span>
-        <span class="contact-link-label">↗</span>
+      <a href="https://www.linkedin.com/in/tarang-tj/" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-icon">in</span> LinkedIn
       </a>
-      <a href="https://github.com/tarang-tj" target="_blank" class="contact-link">
-        <span class="contact-link-icon">GitHub</span>
-        <span class="contact-link-text">github.com/tarang-tj</span>
-        <span class="contact-link-label">↗</span>
+      <a href="https://github.com/tarang-tj" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-icon">⌥</span> GitHub
       </a>
     </div>
   </div>
 </section>
 
+<!-- Footer -->
 <footer>
-  <span>© 2026 Tarang (TJ) Jammalamadaka</span>
-  <span>Data &amp; Business Analyst — Seattle, WA</span>
+  <p class="footer-copy">© 2026 Tarang (TJ) Jammalamadaka</p>
+  <div class="footer-status">
+    <span class="status-dot"></span>
+    Open to Summer 2026 Internships
+  </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-</script>
+  reveals.forEach(el => io.observe(el));
 
-</body>
-</html>
+  // Count-up animation
+  function countUp(el) {
+    const target = +el.dataset.target;
+    const isDecimal = el.dataset.decimal;
+    const duration = 1200;
+    const start = performance.now();
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const val = Math.round(target * ease);
+      el.textContent = val;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const statsSection = document.querySelector('.hero-stats');
+  const countEls = document.querySelectorAll('.count');
+  const statsIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      i
