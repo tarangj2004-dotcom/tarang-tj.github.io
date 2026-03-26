@@ -6,234 +6,143 @@
 <title>Tarang (TJ) Jammalamadaka</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg: #07070E;
-  --bg2: #0D0D1A;
-  --border: #1C1C30;
-  --text: #EAE6DC;
-  --muted: #6A6A80;
-  --faint: #282838;
-  --gold: #C8A84B;
-  --gold-lt: #E2C97A;
-  --gold-dim: rgba(200,168,75,0.10);
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07070E;
+  --bg2:#0D0D1A;
+  --border:#1C1C30;
+  --text:#EAE6DC;
+  --muted:#6A6A80;
+  --faint:#1a1a28;
+  --gold:#C8A84B;
+  --gold-lt:#E2C97A;
+  --gold-dim:rgba(200,168,75,0.10);
 }
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  line-height: 1.7;
-  overflow-x: hidden;
-  cursor: none;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.025;
-}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;cursor:none}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--faint);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
 
 /* CURSOR */
-#cur { position: fixed; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s, height .2s; }
-#cur-r { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(200,168,75,.45); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
-body:has(a:hover) #cur { width: 18px; height: 18px; background: var(--gold-lt); }
-body:has(a:hover) #cur-r { width: 50px; height: 50px; border-color: var(--gold); }
-
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+#cur{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+#cur-r{position:fixed;width:36px;height:36px;border:1px solid rgba(200,168,75,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+body:has(a:hover) #cur{width:18px;height:18px;background:var(--gold-lt)}
+body:has(a:hover) #cur-r{width:50px;height:50px;border-color:var(--gold)}
 
 /* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.5rem 4rem;
-  background: linear-gradient(to bottom, rgba(7,7,14,.95), transparent);
-}
-.nav-logo {
-  font-family: 'Syne', sans-serif; font-size: .85rem; font-weight: 700;
-  letter-spacing: .15em; color: var(--gold); text-decoration: none; text-transform: uppercase;
-}
-.nav-links { display: flex; gap: 2.5rem; list-style: none; }
-.nav-links a {
-  font-family: 'Syne', sans-serif; font-size: .72rem; font-weight: 500;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
-  text-decoration: none; transition: color .2s;
-}
-.nav-links a:hover { color: var(--text); }
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;background:linear-gradient(to bottom,rgba(7,7,14,.95),transparent)}
+.nav-logo{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.15em;color:var(--gold);text-decoration:none;text-transform:uppercase}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
 
 /* HERO */
-.hero {
-  min-height: 100vh; display: flex; flex-direction: column;
-  justify-content: center; padding: 8rem 4rem 5rem;
-  position: relative; overflow: hidden;
-}
-.hero-grid {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image: linear-gradient(to right, var(--faint) 1px, transparent 1px), linear-gradient(to bottom, var(--faint) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
-  opacity: .4;
-}
-.hero-label {
-  font-family: 'Syne', sans-serif; font-size: .72rem; font-weight: 600;
-  letter-spacing: .3em; text-transform: uppercase; color: var(--gold);
-  margin-bottom: 1.5rem; opacity: 0; animation: fadeUp .6s ease forwards .2s;
-}
-.hero-name {
-  font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 8vw, 8rem);
-  font-weight: 300; line-height: 1.0; margin-bottom: 1rem;
-  opacity: 0; animation: fadeUp .7s ease forwards .4s;
-}
-.hero-name em { font-style: italic; color: var(--gold); }
-.hero-sub {
-  font-size: clamp(.95rem, 1.5vw, 1.1rem); font-weight: 300; color: var(--muted);
-  max-width: 560px; margin-bottom: 3rem;
-  opacity: 0; animation: fadeUp .7s ease forwards .6s;
-}
-.hero-ctas {
-  display: flex; gap: 1rem; flex-wrap: wrap;
-  opacity: 0; animation: fadeUp .7s ease forwards .8s;
-}
-.btn {
-  font-family: 'Syne', sans-serif; font-size: .72rem; font-weight: 600;
-  letter-spacing: .18em; text-transform: uppercase; text-decoration: none;
-  padding: .85rem 2rem; border-radius: 2px; transition: all .25s; display: inline-block;
-}
-.btn-primary { background: var(--gold); color: var(--bg); border: 1px solid var(--gold); }
-.btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
-.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-.btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-
-.hero-stats {
-  position: absolute; right: 4rem; bottom: 5rem;
-  display: flex; flex-direction: column; gap: 2rem; text-align: right;
-  opacity: 0; animation: fadeUp .7s ease forwards 1s;
-}
-.stat-num {
-  font-family: 'Cormorant Garamond', serif; font-size: 2.8rem;
-  font-weight: 300; line-height: 1; color: var(--text);
-}
-.stat-num .c { color: var(--gold); }
-.stat-label {
-  font-family: 'Syne', sans-serif; font-size: .65rem; letter-spacing: .2em;
-  text-transform: uppercase; color: var(--muted); margin-top: .2rem;
-}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 5rem;position:relative;overflow:hidden}
+.hero-grid-bg{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(to right,var(--faint) 1px,transparent 1px),linear-gradient(to bottom,var(--faint) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
+  opacity:.5}
+.hero-label{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s ease forwards .2s}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,8rem);font-weight:300;line-height:1.0;margin-bottom:1rem;opacity:0;animation:fadeUp .7s ease forwards .4s}
+.hero-name em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:clamp(.95rem,1.5vw,1.1rem);font-weight:300;color:var(--muted);max-width:560px;margin-bottom:3rem;opacity:0;animation:fadeUp .7s ease forwards .6s}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .7s ease forwards .8s}
+.btn{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:.85rem 2rem;border-radius:2px;transition:all .25s;display:inline-block}
+.btn-primary{background:var(--gold);color:var(--bg);border:1px solid var(--gold)}
+.btn-primary:hover{background:var(--gold-lt);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-stats{position:absolute;right:4rem;bottom:5rem;display:flex;flex-direction:column;gap:2rem;text-align:right;opacity:0;animation:fadeUp .7s ease forwards 1s}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;line-height:1;color:var(--text)}
+.stat-num .g{color:var(--gold)}
+.stat-label{font-family:'Syne',sans-serif;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}
 
 /* REVEAL */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.vis { opacity: 1; transform: translateY(0); }
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
 
-/* SECTIONS */
-section { padding: 7rem 4rem; position: relative; z-index: 1; }
-hr.rule { border: none; border-top: 1px solid var(--border); margin: 0 4rem; }
-.sec-head { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem; }
-.sec-n { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; line-height: 1; color: var(--faint); user-select: none; flex-shrink: 0; }
-.sec-t { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.1; }
-.sec-t em { font-style: italic; color: var(--gold); }
+/* LAYOUT */
+hr.rule{border:none;border-top:1px solid var(--border);margin:0 4rem}
+section{padding:7rem 4rem;position:relative;z-index:1}
+.sec-head{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:4rem}
+.sec-n{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;line-height:1;color:var(--faint);user-select:none;flex-shrink:0}
+.sec-t{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.1}
+.sec-t em{font-style:italic;color:var(--gold)}
 
 /* PROJECTS */
-.proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5px; background: var(--border); }
-.proj-card {
-  background: var(--bg); padding: 2.5rem; position: relative;
-  overflow: hidden; transition: background .3s;
-  display: flex; flex-direction: column; gap: 1rem;
-}
-.proj-card::after {
-  content: ''; position: absolute; inset: 0; background: var(--gold-dim);
-  transform: translateY(100%); transition: transform .4s ease;
-}
-.proj-card:hover::after { transform: translateY(0); }
-.proj-card:hover { background: var(--bg2); }
-.proj-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 1rem; height: 100%; }
-.proj-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 1; }
-.proj-year { font-family: 'Syne', sans-serif; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
-.proj-arrow { font-size: 1.1rem; color: var(--muted); transition: color .2s, transform .2s; }
-.proj-card:hover .proj-arrow { color: var(--gold); transform: translate(3px,-3px); }
-.proj-title { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; line-height: 1.2; position: relative; z-index: 1; }
-.proj-desc { font-size: .88rem; color: var(--muted); line-height: 1.7; position: relative; z-index: 1; }
-.proj-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: auto; position: relative; z-index: 1; }
-.tag {
-  font-family: 'Syne', sans-serif; font-size: .6rem; font-weight: 600; letter-spacing: .15em;
-  text-transform: uppercase; padding: .3rem .7rem; border: 1px solid var(--border);
-  color: var(--muted); border-radius: 1px; transition: border-color .2s, color .2s;
-}
-.proj-card:hover .tag { border-color: rgba(200,168,75,.3); color: var(--gold-lt); }
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border)}
+.proj-link{text-decoration:none;color:inherit}
+.proj-card{background:var(--bg);padding:2.5rem;position:relative;overflow:hidden;transition:background .3s;display:flex;flex-direction:column;gap:1rem;height:100%}
+.proj-card::after{content:'';position:absolute;inset:0;background:var(--gold-dim);transform:translateY(100%);transition:transform .4s ease}
+.proj-card:hover::after{transform:translateY(0)}
+.proj-card:hover{background:var(--bg2)}
+.proj-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1}
+.proj-year{font-family:'Syne',sans-serif;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.proj-arrow{font-size:1.1rem;color:var(--muted);transition:color .2s,transform .2s}
+.proj-card:hover .proj-arrow{color:var(--gold);transform:translate(3px,-3px)}
+.proj-title{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:400;line-height:1.2;position:relative;z-index:1}
+.proj-desc{font-size:.88rem;color:var(--muted);line-height:1.7;position:relative;z-index:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:auto;position:relative;z-index:1}
+.tag{font-family:'Syne',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .7rem;border:1px solid var(--border);color:var(--muted);border-radius:1px;transition:border-color .2s,color .2s}
+.proj-card:hover .tag{border-color:rgba(200,168,75,.3);color:var(--gold-lt)}
 
 /* EXPERIENCE */
-.exp-list { display: flex; flex-direction: column; }
-.exp-item {
-  display: grid; grid-template-columns: 200px 1fr; gap: 3rem;
-  padding: 2.5rem 0; border-bottom: 1px solid var(--border);
-}
-.exp-item:first-child { border-top: 1px solid var(--border); }
-.exp-period { font-family: 'Syne', sans-serif; font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
-.exp-company { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: .2rem; }
-.exp-loc { font-family: 'Syne', sans-serif; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-.exp-role { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 1rem; }
-.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
-.exp-bullets li { font-size: .88rem; color: var(--muted); padding-left: 1.2rem; position: relative; }
-.exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: .75rem; }
-.exp-bullets li strong { color: var(--text); font-weight: 400; }
+.exp-list{display:flex;flex-direction:column}
+.exp-item{display:grid;grid-template-columns:200px 1fr;gap:3rem;padding:2.5rem 0;border-bottom:1px solid var(--border)}
+.exp-item:first-child{border-top:1px solid var(--border)}
+.exp-period{font-family:'Syne',sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.exp-company{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;margin-bottom:.2rem}
+.exp-loc{font-family:'Syne',sans-serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.exp-role{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;margin-bottom:1rem}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.exp-bullets li{font-size:.88rem;color:var(--muted);padding-left:1.2rem;position:relative}
+.exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:.75rem}
+.exp-bullets li strong{color:var(--text);font-weight:400}
 
 /* SKILLS */
-.skills-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5px; background: var(--border); }
-.skill-group { background: var(--bg); padding: 2.5rem; }
-.skill-group-title { font-family: 'Syne', sans-serif; font-size: .65rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
-.skill-items { display: flex; flex-direction: column; gap: .6rem; }
-.skill-item { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 300; color: var(--text); transition: color .2s; }
-.skill-item:hover { color: var(--gold-lt); }
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border)}
+.skill-group{background:var(--bg);padding:2.5rem}
+.skill-group-title{font-family:'Syne',sans-serif;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+.skill-items{display:flex;flex-direction:column;gap:.6rem}
+.skill-item{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:300;color:var(--text);transition:color .2s}
+.skill-item:hover{color:var(--gold-lt)}
 
 /* CONTACT */
-#contact { background: var(--bg2); }
-.contact-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; max-width: 700px; margin-bottom: 3rem; }
-.contact-heading em { font-style: italic; color: var(--gold); }
-.contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
-.contact-link {
-  display: flex; align-items: center; gap: .8rem; padding: 1rem 1.8rem;
-  border: 1px solid var(--border); text-decoration: none; color: var(--text);
-  font-family: 'Syne', sans-serif; font-size: .72rem; letter-spacing: .15em;
-  text-transform: uppercase; transition: all .25s; border-radius: 2px;
-}
-.contact-link:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+#contact{background:var(--bg2)}
+.contact-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1.05;max-width:700px;margin-bottom:3rem}
+.contact-heading em{font-style:italic;color:var(--gold)}
+.contact-links{display:flex;gap:1rem;flex-wrap:wrap}
+.contact-link{display:flex;align-items:center;gap:.8rem;padding:1rem 1.8rem;border:1px solid var(--border);text-decoration:none;color:var(--text);font-family:'Syne',sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;transition:all .25s;border-radius:2px}
+.contact-link:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
 
 /* FOOTER */
-footer {
-  padding: 2rem 4rem; border-top: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
-}
-.footer-copy { font-family: 'Syne', sans-serif; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
-.footer-status { display: flex; align-items: center; gap: .5rem; font-family: 'Syne', sans-serif; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-.status-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; animation: pulse 2s ease-in-out infinite; }
+footer{padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-family:'Syne',sans-serif;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.footer-status{display:flex;align-items:center;gap:.5rem;font-family:'Syne',sans-serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.status-dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;animation:pulse 2s ease-in-out infinite}
 
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-@media (max-width: 900px) {
-  nav { padding: 1.25rem 2rem; }
-  .nav-links { display: none; }
-  .hero { padding: 7rem 2rem 4rem; }
-  .hero-stats { display: none; }
-  section { padding: 5rem 2rem; }
-  hr.rule { margin: 0 2rem; }
-  .proj-grid { grid-template-columns: 1fr; }  .exp-item { grid-template-columns: 1fr; gap: .5rem; }
-  .skills-grid { grid-template-columns: repeat(2,1fr); }
-  footer { padding: 1.5rem 2rem; }
+@media(max-width:1000px){
+  nav{padding:1.25rem 2rem}
+  .nav-links{display:none}
+  .hero{padding:7rem 2rem 4rem}
+  .hero-stats{display:none}
+  section{padding:5rem 2rem}
+  hr.rule{margin:0 2rem}
+  .proj-grid{grid-template-columns:1fr}
+  .exp-item{grid-template-columns:1fr;gap:.5rem}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  footer{padding:1.5rem 2rem}
 }
-@media (max-width: 500px) {
-  .skills-grid { grid-template-columns: 1fr; }
+@media(max-width:500px){
+  .skills-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -253,29 +162,29 @@ footer {
 </nav>
 
 <section class="hero">
-  <div class="hero-grid"></div>
+  <div class="hero-grid-bg"></div>
   <p class="hero-label">Data &amp; Product Analyst &mdash; Seattle, WA</p>
   <h1 class="hero-name">Tarang <em>(TJ)</em><br>Jammalamadaka</h1>
   <p class="hero-sub">MIS student at UW Bothell turning messy data into decisions that stick. 4+ years across product analytics, IT business analysis, and operations.</p>
   <div class="hero-ctas">
     <a href="#projects" class="btn btn-primary">View Work</a>
-    <a href="/cdn-cgi/l/email-protection#fa8e9b889b949d909b97979b969b979b9e9b919bc3ba9d979b9396d4999597" class="btn btn-outline">Get in Touch</a>
+    <a href="mailto:tarangjammalamadaka9@gmail.com" class="btn btn-outline">Get in Touch</a>
   </div>
   <div class="hero-stats">
     <div>
-      <div class="stat-num"><span class="c" id="s1">4</span>+</div>
+      <div class="stat-num"><span class="g" id="s1">4</span>+</div>
       <div class="stat-label">Years Experience</div>
     </div>
     <div>
-      <div class="stat-num"><span class="c" id="s2">50</span>K</div>
+      <div class="stat-num"><span class="g" id="s2">50</span>K</div>
       <div class="stat-label">MAU Database &mdash; SQL</div>
     </div>
     <div>
-      <div class="stat-num"><span class="c" id="s3">12</span>+</div>
+      <div class="stat-num"><span class="g" id="s3">12</span>+</div>
       <div class="stat-label">Dashboards Built</div>
     </div>
     <div>
-      <div class="stat-num">3<span class="c">.7</span></div>
+      <div class="stat-num">3<span class="g">.7</span></div>
       <div class="stat-label">GPA &mdash; Dean's List</div>
     </div>
   </div>
@@ -296,7 +205,11 @@ footer {
         <h3 class="proj-title">Economic Pulse Dashboard</h3>
         <p class="proj-desc">End-to-end Python pipeline fetching 7 FRED macroeconomic indicators. ETL with pandas, statistical trend detection via linear regression, and an interactive dashboard with Plotly charts, recession shading, and correlation heatmap.</p>
         <div class="proj-tags">
-          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Streamlit</span><span class="tag">FRED API</span><span class="tag">ETL</span>
+          <span class="tag">Python</span>
+          <span class="tag">pandas</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">FRED API</span>
+          <span class="tag">ETL</span>
         </div>
       </div>
     </a>
@@ -307,7 +220,10 @@ footer {
         <h3 class="proj-title">E-Commerce SQL Analytics</h3>
         <p class="proj-desc">End-to-end PostgreSQL analytics on a normalized 6-table schema. Revenue KPIs, customer lifetime value, cohort retention, market basket analysis, and rolling revenue windows across 4 query modules.</p>
         <div class="proj-tags">
-          <span class="tag">PostgreSQL</span><span class="tag">SQL</span><span class="tag">Cohort Analysis</span><span class="tag">Window Functions</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Cohort Analysis</span>
+          <span class="tag">Window Functions</span>
         </div>
       </div>
     </a>
@@ -318,7 +234,10 @@ footer {
         <h3 class="proj-title">WA Homelessness &amp; Housing Analysis</h3>
         <p class="proj-desc">Team analysis of 9 years of Zillow Rental Index data alongside income and homelessness metrics for Washington State. Identified inflection points where rent outpaced income growth and built an interactive Tableau dashboard for policy storytelling.</p>
         <div class="proj-tags">
-          <span class="tag">R</span><span class="tag">Tableau</span><span class="tag">Trend Analysis</span><span class="tag">Public Data</span>
+          <span class="tag">R</span>
+          <span class="tag">Tableau</span>
+          <span class="tag">Trend Analysis</span>
+          <span class="tag">Public Data</span>
         </div>
       </div>
     </a>
@@ -329,18 +248,23 @@ footer {
         <h3 class="proj-title">Operations &amp; Forecasting Model</h3>
         <p class="proj-desc">Multivariate regression model on 18 months of sales data achieving 94% prediction accuracy. Interactive KPI dashboard tracking 15+ operational metrics, driving a 35% reduction in carrying costs.</p>
         <div class="proj-tags">
-          <span class="tag">Excel</span><span class="tag">Regression</span><span class="tag">KPI Dashboard</span><span class="tag">Forecasting</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Regression</span>
+          <span class="tag">KPI Dashboard</span>
+          <span class="tag">Forecasting</span>
         </div>
       </div>
     </a>
 
     <a class="proj-link" href="https://tarang-tj.github.io/team-cartier-dashboard/" target="_blank" rel="noopener">
-      <div class="proj-card">
+      <div class="proj-card" style="grid-column:span 2">
         <div class="proj-top"><span class="proj-year">2025</span><span class="proj-arrow">&#8599;</span></div>
         <h3 class="proj-title">CED Financial Case Competition</h3>
         <p class="proj-desc">Modeled a multi-channel growth strategy projecting $15.3M revenue and 81.5% operating income improvement. Analyzed 25+ expense categories to identify 10&ndash;16% cost reduction levers.</p>
         <div class="proj-tags">
-          <span class="tag">Financial Modeling</span><span class="tag">Strategy</span><span class="tag">Excel</span>
+          <span class="tag">Financial Modeling</span>
+          <span class="tag">Strategy</span>
+          <span class="tag">Excel</span>
         </div>
       </div>
     </a>
@@ -461,7 +385,7 @@ footer {
 <section id="contact">
   <h2 class="contact-heading reveal">Let's work on<br>something <em>good.</em></h2>
   <div class="contact-links reveal">
-    <a href="/cdn-cgi/l/email-protection#cdb9acbfaca3aaa7aca0a0aca1aca0aca9aca6acf48daaa0aca4a1e3aea2a0" class="contact-link">&#9993; Email</a>
+    <a href="mailto:tarangjammalamadaka9@gmail.com" class="contact-link">&#9993; Email</a>
     <a href="https://www.linkedin.com/in/tarang-tj/" target="_blank" rel="noopener" class="contact-link">in LinkedIn</a>
     <a href="https://github.com/tarang-tj" target="_blank" rel="noopener" class="contact-link">&#8997; GitHub</a>
   </div>
@@ -475,38 +399,41 @@ footer {
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // Cursor
-const cur = document.getElementById('cur');
-const curR = document.getElementById('cur-r');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function loop() {
-  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-  curR.style.left = rx + 'px'; curR.style.top = ry + 'px';
+const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  curR.style.left=rx+'px';curR.style.top=ry+'px';
   requestAnimationFrame(loop);
 })();
 
 // Scroll reveal
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
 // Count-up
-function countUp(el, target, duration) {
-  const start = performance.now();
-  (function step(now) {
-    const p = Math.min((now - start) / duration, 1);
-    const ease = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.round(target * ease);
-    if (p < 1) requestAnimationFrame(step);
+function countUp(id,target){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const start=performance.now();
+  (function step(now){
+    const p=Math.min((now-start)/1100,1);
+    const ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*ease);
+    if(p<1)requestAnimationFrame(step);
   })(start);
 }
-const statsEl = document.querySelector('.hero-stats');
-let counted = false;
-new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting && !counted) {
-    counted = true;
-    countUp(docume
+let counted=false;
+new IntersectionObserver(es=>{
+  if(es[0].isIntersecting&&!counted){
+    counted=true;
+    countUp('s1',4);countUp('s2',50);countUp('s3',12);
+  }
+},{threshold:.5}).observe(document.querySelector('.hero-stats'));
+</script>
+</body>
+</html>
