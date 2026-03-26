@@ -145,7 +145,7 @@ hr.rule { border: none; border-top: 1px solid var(--border); margin: 0 4rem; }
 .sec-t em { font-style: italic; color: var(--gold); }
 
 /* PROJECTS */
-.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5px; background: var(--border); }
+.proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5px; background: var(--border); }
 .proj-card {
   background: var(--bg); padding: 2.5rem; position: relative;
   overflow: hidden; transition: background .3s;
@@ -228,8 +228,7 @@ footer {
   .hero-stats { display: none; }
   section { padding: 5rem 2rem; }
   hr.rule { margin: 0 2rem; }
-  .proj-grid { grid-template-columns: 1fr; }
-  .exp-item { grid-template-columns: 1fr; gap: .5rem; }
+  .proj-grid { grid-template-columns: 1fr; }  .exp-item { grid-template-columns: 1fr; gap: .5rem; }
   .skills-grid { grid-template-columns: repeat(2,1fr); }
   footer { padding: 1.5rem 2rem; }
 }
@@ -260,7 +259,7 @@ footer {
   <p class="hero-sub">MIS student at UW Bothell turning messy data into decisions that stick. 4+ years across product analytics, IT business analysis, and operations.</p>
   <div class="hero-ctas">
     <a href="#projects" class="btn btn-primary">View Work</a>
-    <a href="mailto:tarangjammalamadaka9@gmail.com" class="btn btn-outline">Get in Touch</a>
+    <a href="/cdn-cgi/l/email-protection#fa8e9b889b949d909b97979b969b979b9e9b919bc3ba9d979b9396d4999597" class="btn btn-outline">Get in Touch</a>
   </div>
   <div class="hero-stats">
     <div>
@@ -462,7 +461,7 @@ footer {
 <section id="contact">
   <h2 class="contact-heading reveal">Let's work on<br>something <em>good.</em></h2>
   <div class="contact-links reveal">
-    <a href="mailto:tarangjammalamadaka9@gmail.com" class="contact-link">&#9993; Email</a>
+    <a href="/cdn-cgi/l/email-protection#cdb9acbfaca3aaa7aca0a0aca1aca0aca9aca6acf48daaa0aca4a1e3aea2a0" class="contact-link">&#9993; Email</a>
     <a href="https://www.linkedin.com/in/tarang-tj/" target="_blank" rel="noopener" class="contact-link">in LinkedIn</a>
     <a href="https://github.com/tarang-tj" target="_blank" rel="noopener" class="contact-link">&#8997; GitHub</a>
   </div>
@@ -476,7 +475,7 @@ footer {
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Cursor
 const cur = document.getElementById('cur');
 const curR = document.getElementById('cur-r');
@@ -510,11 +509,4 @@ let counted = false;
 new IntersectionObserver(entries => {
   if (entries[0].isIntersecting && !counted) {
     counted = true;
-    countUp(document.getElementById('s1'), 4, 1000);
-    countUp(document.getElementById('s2'), 50, 1200);
-    countUp(document.getElementById('s3'), 12, 1100);
-  }
-}, { threshold: 0.5 }).observe(statsEl);
-</script>
-</body>
-</html>
+    countUp(docume
