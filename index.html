@@ -215,7 +215,7 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
   to   { opacity: 1; transform: translateX(0); }
 }
 
-/* ORBIT LABELS — appended directly to body, no inheritance issues */
+/* ORBIT LABELS */
 .orbit-label {
   position: fixed;
   font-family: 'Space Mono', monospace;
@@ -440,9 +440,7 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
 .ld-sub { font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); }
 
 /* ── MOBILE BOTTOM NAV ─────────────────────────────── */
-#mobile-nav {
-  display: none;
-}
+#mobile-nav { display: none; }
 
 /* ── MOBILE ────────────────────────────────────────── */
 @media (max-width: 768px) {
@@ -460,7 +458,7 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
   .nav-status { display: none; }
   .nav-logo { font-size: 1rem; }
 
-  /* Hero — compact card, doesn't cover full screen */
+  /* Hero */
   #hero {
     position: fixed;
     left: 0; right: 0;
@@ -475,7 +473,6 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
     max-height: none;
   }
 
-  /* Hide description and hero buttons — bottom nav handles navigation */
   .hero-desc  { display: none; }
   .hero-btns  { display: none; }
 
@@ -553,7 +550,7 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
     flex-shrink: 0;
   }
 
-  /* Panels — full screen on mobile, padded above bottom nav */
+  /* Panels — full screen on mobile */
   .panel {
     padding: 0;
     align-items: stretch;
@@ -563,7 +560,8 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
   .panel-box {
     border: none;
     border-radius: 0;
-    padding: 4.5rem 1.25rem 5.5rem; /* bottom pad clears the bottom nav */
+    /* FIX: top padding increased so content clears the close button bar */
+    padding: 5.5rem 1.25rem 5.5rem;
     min-height: 100vh;
     width: 100%;
     max-width: none;
@@ -572,10 +570,32 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
   .panel-title { font-size: 1.65rem; }
   .panel-tag { margin-bottom: 1.5rem; }
 
+  /* FIX: Prominent mobile close button — full-width bar at top */
   .panel-close-btn {
-    top: 0.85rem; right: 1rem;
-    font-size: 0.55rem;
-    padding: 0.45rem 0.75rem;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    width: 100%;
+    font-size: 0.62rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--glow);
+    background: rgba(2,4,8,0.98);
+    border: none;
+    border-bottom: 1px solid rgba(0,229,255,0.25);
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    text-align: left;
+    z-index: 210;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .panel-close-btn::before {
+    content: '←';
+    font-size: 1rem;
+    color: var(--glow);
+    line-height: 1;
   }
 
   /* Projects */
@@ -692,7 +712,7 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
 <!-- PROJECTS -->
 <div class="panel" id="panel-projects">
   <div class="panel-backdrop" onclick="closePanel('projects')"></div>
-  <button class="panel-close-btn" onclick="closePanel('projects')">[ ESC ] Close</button>
+  <button class="panel-close-btn" onclick="closePanel('projects')">Back</button>
   <div class="panel-box">
     <div class="panel-title">Selected Projects</div>
     <div class="panel-tag">// 01 — Work</div>
@@ -744,7 +764,7 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
 <!-- EXPERIENCE -->
 <div class="panel" id="panel-experience">
   <div class="panel-backdrop" onclick="closePanel('experience')"></div>
-  <button class="panel-close-btn" onclick="closePanel('experience')">[ ESC ] Close</button>
+  <button class="panel-close-btn" onclick="closePanel('experience')">Back</button>
   <div class="panel-box">
     <div class="panel-title">Experience</div>
     <div class="panel-tag">// 02 — Career Timeline</div>
@@ -786,7 +806,7 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
 <!-- SKILLS -->
 <div class="panel" id="panel-skills">
   <div class="panel-backdrop" onclick="closePanel('skills')"></div>
-  <button class="panel-close-btn" onclick="closePanel('skills')">[ ESC ] Close</button>
+  <button class="panel-close-btn" onclick="closePanel('skills')">Back</button>
   <div class="panel-box">
     <div class="panel-title">Skills</div>
     <div class="panel-tag">// 03 — Technical Stack</div>
@@ -825,7 +845,7 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
 <!-- CONTACT -->
 <div class="panel" id="panel-contact">
   <div class="panel-backdrop" onclick="closePanel('contact')"></div>
-  <button class="panel-close-btn" onclick="closePanel('contact')">[ ESC ] Close</button>
+  <button class="panel-close-btn" onclick="closePanel('contact')">Back</button>
   <div class="panel-box">
     <div class="panel-title">Contact</div>
     <div class="panel-tag">// 04 — Get In Touch</div>
@@ -861,12 +881,12 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
 'use strict';
 
 // ─── CURSOR ────────────────────────────────────────────────
-const cursorEl = document.getElementById('cursor');
-const ringEl   = document.getElementById('cursor-ring');
-let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
-let ringX  = mouseX, ringY = mouseY;
+var cursorEl = document.getElementById('cursor');
+var ringEl   = document.getElementById('cursor-ring');
+var mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+var ringX  = mouseX, ringY = mouseY;
 
-document.addEventListener('mousemove', e => {
+document.addEventListener('mousemove', function(e) {
   mouseX = e.clientX; mouseY = e.clientY;
   cursorEl.style.left = mouseX + 'px';
   cursorEl.style.top  = mouseY + 'px';
@@ -881,8 +901,8 @@ document.addEventListener('mousemove', e => {
 })();
 
 function addHover(el) {
-  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+  el.addEventListener('mouseenter', function() { document.body.classList.add('hovering'); });
+  el.addEventListener('mouseleave', function() { document.body.classList.remove('hovering'); });
 }
 document.querySelectorAll('button, a, .proj-card').forEach(addHover);
 
@@ -893,20 +913,20 @@ function openPanel(name) {
 function closePanel(name) {
   document.getElementById('panel-' + name).classList.remove('open');
 }
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
-    document.querySelectorAll('.panel.open').forEach(p => p.classList.remove('open'));
+    document.querySelectorAll('.panel.open').forEach(function(p) { p.classList.remove('open'); });
   }
 });
 
 // ─── THREE.JS ──────────────────────────────────────────────
-const canvas   = document.getElementById('bg-canvas');
-const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+var canvas   = document.getElementById('bg-canvas');
+var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-const scene  = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 2000);
+var scene  = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 2000);
 camera.position.z = window.innerWidth < 768 ? 130 : 90;
 
 // Stars
@@ -930,11 +950,21 @@ camera.position.z = window.innerWidth < 768 ? 130 : 90;
 // System group (tilted solar system)
 var systemGroup = new THREE.Group();
 systemGroup.rotation.x = 0.28;
+
+// FIX: Scale down the entire system on mobile so the globe isn't overwhelming
+if (window.innerWidth < 768) {
+  systemGroup.scale.setScalar(0.62);
+}
+
 scene.add(systemGroup);
 
 // Central commit globe
 var globeGroup = new THREE.Group();
-systemGroup.add(globeGroup);  // ONLY added here
+// FIX: Shrink the center globe specifically on mobile
+if (window.innerWidth < 768) {
+  globeGroup.scale.setScalar(0.52);
+}
+systemGroup.add(globeGroup);
 
 // Wireframe shell
 var shellGeo = new THREE.SphereGeometry(15, 28, 28);
@@ -1009,7 +1039,7 @@ PLANETS.forEach(function(pd) {
     new THREE.MeshBasicMaterial({ color: pd.color, transparent: true, opacity: 0.055, side: THREE.BackSide })
   ));
 
-  // HTML label — appended to BODY to avoid pointer-events:none inheritance
+  // HTML label — appended to BODY
   var div = document.createElement('div');
   div.className = 'orbit-label';
   div.innerHTML = '<span class="lnum">' + pd.num + '</span>' + pd.name;
@@ -1052,6 +1082,8 @@ window.addEventListener('mousemove', function(e) {
 // ── TOUCH EVENTS (mobile drag + tap) ────────────────
 var touchStartX = 0, touchStartY = 0, touchMoved = false;
 canvas.addEventListener('touchstart', function(e) {
+  // FIX: Only track single-finger touches
+  if (e.touches.length > 1) return;
   touchStartX = e.touches[0].clientX;
   touchStartY = e.touches[0].clientY;
   touchMoved = false;
@@ -1059,6 +1091,11 @@ canvas.addEventListener('touchstart', function(e) {
 }, { passive: true });
 
 canvas.addEventListener('touchmove', function(e) {
+  // FIX: Completely ignore multi-touch (pinch zoom) — don't rotate on pinch
+  if (e.touches.length > 1) {
+    velX = 0; velY = 0;
+    return;
+  }
   var dx = e.touches[0].clientX - touchStartX;
   var dy = e.touches[0].clientY - touchStartY;
   if (Math.abs(dx) > 4 || Math.abs(dy) > 4) touchMoved = true;
@@ -1070,7 +1107,6 @@ canvas.addEventListener('touchmove', function(e) {
 
 canvas.addEventListener('touchend', function(e) {
   if (!touchMoved) {
-    // Treat as tap — check planet hit
     var touch = e.changedTouches[0];
     ndcMouse.x =  (touch.clientX / window.innerWidth)  * 2 - 1;
     ndcMouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
@@ -1138,10 +1174,10 @@ function animate() {
     mesh.rotation.x += 0.008;
   }
 
-  // Render first so world matrices are current
+  // Render
   renderer.render(scene, camera);
 
-  // Project planet positions → screen for HTML labels
+  // Project planet positions for HTML labels
   for (var j = 0; j < planetMeshes.length; j++) {
     planetMeshes[j].getWorldPosition(worldVec);
     worldVec.project(camera);
