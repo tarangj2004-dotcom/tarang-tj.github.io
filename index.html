@@ -439,6 +439,11 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
 @keyframes ldFill { to { width: 100%; } }
 .ld-sub { font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); }
 
+/* ── MOBILE BOTTOM NAV ─────────────────────────────── */
+#mobile-nav {
+  display: none;
+}
+
 /* ── MOBILE ────────────────────────────────────────── */
 @media (max-width: 768px) {
 
@@ -446,89 +451,109 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
   #cursor, #cursor-ring, #hud, #hint { display: none !important; }
   body { cursor: auto; }
 
-  /* Nav — compact, hide long status text */
+  /* Nav — compact */
   #nav {
-    padding: 0.9rem 1.2rem;
-    background: rgba(2,4,8,0.95);
+    padding: 0.85rem 1.2rem;
+    background: rgba(2,4,8,0.98);
+    border-bottom: 1px solid rgba(0,229,255,0.1);
   }
   .nav-status { display: none; }
   .nav-logo { font-size: 1rem; }
 
-  /* Hero — full-width card at top, scrollable */
+  /* Hero — compact card, doesn't cover full screen */
   #hero {
     position: fixed;
     left: 0; right: 0;
-    top: 3.8rem;
+    top: 3.4rem;
     bottom: auto;
     max-width: none;
     transform: none;
-    padding: 1.2rem 1rem 1rem 1rem;
-    background: linear-gradient(to bottom, rgba(2,4,8,0.97) 80%, transparent 100%);
+    padding: 1.1rem 1.2rem 1.2rem;
+    background: linear-gradient(to bottom, rgba(2,4,8,0.96) 75%, rgba(2,4,8,0.0) 100%);
     border-left: none;
-    border-bottom: 1px solid rgba(0,229,255,0.12);
-    overflow-y: auto;
-    max-height: calc(100vh - 3.8rem);
+    overflow: visible;
+    max-height: none;
   }
 
-  .hero-eyebrow { font-size: 0.55rem; margin-bottom: 0.6rem; }
+  /* Hide description and hero buttons — bottom nav handles navigation */
+  .hero-desc  { display: none; }
+  .hero-btns  { display: none; }
+
+  .hero-eyebrow { font-size: 0.52rem; margin-bottom: 0.55rem; }
 
   .hero-name {
-    font-size: 3.2rem;
-    line-height: 1;
-    margin-bottom: 0.35rem;
+    font-size: 2.6rem;
+    line-height: 0.95;
+    margin-bottom: 0.3rem;
     text-shadow: none;
   }
   .hero-name .hero-last {
-    font-size: 1.15rem;
-    letter-spacing: 0.04em;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
     color: var(--text);
     margin-top: 0.2rem;
     font-weight: 700;
   }
 
-  .hero-role { font-size: 0.85rem; margin-bottom: 0.8rem; }
-
-  .hero-desc {
-    font-size: 0.7rem;
-    line-height: 1.7;
-    margin-bottom: 1.2rem;
-    max-width: none;
-  }
+  .hero-role { font-size: 0.78rem; margin-bottom: 0.9rem; }
 
   .hero-stats {
-    gap: 1.2rem;
-    margin-bottom: 1.2rem;
+    gap: 1.1rem;
+    margin-bottom: 0;
     flex-wrap: wrap;
   }
+  .stat-num { font-size: 1.25rem; }
+  .stat-lbl { font-size: 0.48rem; }
 
-  .stat-num { font-size: 1.4rem; }
-  .stat-lbl { font-size: 0.5rem; }
+  /* Canvas fills screen behind hero */
+  #bg-canvas { position: fixed; top: 0; bottom: 0; }
 
-  .hero-btns {
-    gap: 0.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .btn-nav {
-    font-size: 0.58rem;
-    padding: 0.7rem 0.5rem;
-    text-align: center;
-    border: 1px solid rgba(0,229,255,0.35);
-    background: rgba(0,229,255,0.08);
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* Globe sits in lower half as background */
-  #bg-canvas {
-    position: fixed;
-    top: 0; bottom: 0;
-  }
-
-  /* Orbit labels — hide them on mobile, nav buttons do the job */
+  /* Orbit labels hidden on mobile */
   .orbit-label { display: none !important; }
 
-  /* Panels — full screen on mobile */
+  /* ── BOTTOM NAV BAR ── */
+  #mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 150;
+    background: rgba(2,4,8,0.97);
+    border-top: 1px solid rgba(0,229,255,0.14);
+    padding: 0;
+  }
+  .mob-nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.7rem 0.4rem 0.85rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #7ab8d4;
+    background: none;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.18s;
+    border-right: 1px solid rgba(0,229,255,0.07);
+  }
+  .mob-nav-btn:last-child { border-right: none; }
+  .mob-nav-btn:active { color: var(--glow); background: rgba(0,229,255,0.06); }
+  .mob-nav-btn svg {
+    width: 16px; height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* Panels — full screen on mobile, padded above bottom nav */
   .panel {
     padding: 0;
     align-items: stretch;
@@ -538,52 +563,52 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
   .panel-box {
     border: none;
     border-radius: 0;
-    padding: 5rem 1.25rem 2rem;
+    padding: 4.5rem 1.25rem 5.5rem; /* bottom pad clears the bottom nav */
     min-height: 100vh;
     width: 100%;
     max-width: none;
   }
 
-  .panel-title { font-size: 1.8rem; }
-  .panel-tag { margin-bottom: 1.75rem; }
+  .panel-title { font-size: 1.65rem; }
+  .panel-tag { margin-bottom: 1.5rem; }
 
   .panel-close-btn {
-    top: 1rem; right: 1rem;
-    font-size: 0.58rem;
-    padding: 0.5rem 0.8rem;
+    top: 0.85rem; right: 1rem;
+    font-size: 0.55rem;
+    padding: 0.45rem 0.75rem;
   }
 
   /* Projects */
   .proj-grid { grid-template-columns: 1fr; }
-  .proj-name { font-size: 1rem; }
-  .proj-desc { font-size: 0.72rem; }
+  .proj-name { font-size: 0.95rem; }
+  .proj-desc { font-size: 0.7rem; }
 
   /* Experience */
-  .exp-timeline { padding-left: 1.25rem; }
-  .exp-role { font-size: 1.05rem; }
-  .exp-list li { font-size: 0.72rem; }
+  .exp-timeline { padding-left: 1.2rem; }
+  .exp-role { font-size: 1rem; }
+  .exp-list li { font-size: 0.7rem; }
 
   /* Skills */
   .skills-grid { grid-template-columns: 1fr; }
-  .skill-name { min-width: 110px; font-size: 0.7rem; }
+  .skill-name { min-width: 110px; font-size: 0.68rem; }
 
   /* Contact */
   .contact-split { grid-template-columns: 1fr; gap: 1.5rem; }
-  .contact-big { font-size: 1.5rem; }
+  .contact-big { font-size: 1.4rem; }
   .clink { padding: 1rem; }
-  .clink-val { font-size: 0.7rem; word-break: break-all; }
+  .clink-val { font-size: 0.68rem; word-break: break-all; }
 
-  /* Vignette less aggressive on mobile */
+  /* Vignette */
   #vignette {
-    background: radial-gradient(ellipse at center, transparent 20%, rgba(2,4,8,0.65) 100%);
+    background: radial-gradient(ellipse at center, transparent 15%, rgba(2,4,8,0.6) 100%);
   }
 }
 
 /* Very small phones */
 @media (max-width: 380px) {
-  .hero-name { font-size: clamp(1.3rem, 7vw, 2rem); }
-  .hero-btns { grid-template-columns: 1fr; }
-  .hero-stats { gap: 0.9rem; }
+  .hero-name { font-size: 2.1rem; }
+  .hero-stats { gap: 0.85rem; }
+  .mob-nav-btn { font-size: 0.42rem; padding: 0.65rem 0.2rem 0.8rem; }
 }
 </style>
 </head>
@@ -641,6 +666,26 @@ body.hovering #cursor-ring { width: 48px; height: 48px; }
 
 <!-- HINT -->
 <div id="hint">Drag to rotate &nbsp;·&nbsp; Click orbs to explore</div>
+
+<!-- ── MOBILE BOTTOM NAV ─────────────────────────────────── -->
+<div id="mobile-nav">
+  <button class="mob-nav-btn" onclick="openPanel('projects')">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Projects
+  </button>
+  <button class="mob-nav-btn" onclick="openPanel('experience')">
+    <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+    Experience
+  </button>
+  <button class="mob-nav-btn" onclick="openPanel('skills')">
+    <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    Skills
+  </button>
+  <button class="mob-nav-btn" onclick="openPanel('contact')">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    Contact
+  </button>
+</div>
 
 <!-- ── PANELS ───────────────────────────────────────────── -->
 
